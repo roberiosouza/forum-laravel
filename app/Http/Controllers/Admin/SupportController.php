@@ -14,4 +14,27 @@ class SupportController extends Controller
         $supports = Support::all();
         return view('admin/supports/index', compact('supports'));
     }
+
+    public function create()
+    {
+        return view('admin/supports/create');
+    }
+    
+    public function store(Request $request, Support $support)
+    {
+        $data = $request->all();
+        $data['status'] = 'a';
+
+        $support->create($data);
+        return redirect()->route('supports.index');
+    }
+
+    public function detail(string|int $id)
+    {
+        if (!$support = Support::find($id)){
+            return back();
+        }
+
+        return view('admin/supports/detail', compact('support'));
+    }
 }

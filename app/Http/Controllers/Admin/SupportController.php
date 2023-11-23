@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DTO\CreateSupportDTO;
-use App\DTO\UpdateSupportDTO;
+use App\DTO\{CreateSupportDTO, UpdateSupportDTO};
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateSupport;
 use App\Models\Support;
-use App\Service\SupportService;
+use App\Services\SupportService;
 use Illuminate\Http\Request;
 
 class SupportController extends Controller
@@ -30,7 +29,7 @@ class SupportController extends Controller
         return view('admin/supports/create');
     }
     
-    public function store(StoreUpdateSupport $request, Support $support)
+    public function store(StoreUpdateSupport $request)
     {
         $this->service->new(
             CreateSupportDTO::makeFromRequest($request)
@@ -59,10 +58,10 @@ class SupportController extends Controller
         return view('admin/supports/update', compact('support'));
     }
 
-    public function update(string|int $id,  StoreUpdateSupport $request)
+    public function update(StoreUpdateSupport $request, string $id)
     {  
         $support = $this->service->update(
-            UpdateSupportDTO::makeFromRequest($request)
+            UpdateSupportDTO::makeFromRequest($request, $id)
         );
 
         if (!$support)

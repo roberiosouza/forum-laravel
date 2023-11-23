@@ -11,14 +11,14 @@
     <tbody>
         @foreach($supports as $support)
             <tr>
-                <td>{{ $support->subject }}</td>
-                <td>{{ $support->status }}</td>
-                <td>{{ $support->body }}</td>
+                <td>{{ $support['subject'] }}</td>
+                <td>{{ $support['status'] }}</td>
+                <td>{{ $support['body'] }}</td>
                 <td>
-                    <a href="{{ route('supports.showUpdate', $support->id) }}">Editar</a>
+                    <a href="{{ route('supports.showUpdate', $support['id']) }}">Editar</a>
                 </td>
                 <td>
-                    <a href="{{ route('supports.detail', $support->id) }}">Detalhes</a>
+                    <a href="{{ route('supports.detail', $support['id']) }}">Detalhes</a>
                 </td>
             </tr>
         @endforeach

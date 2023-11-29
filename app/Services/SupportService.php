@@ -37,4 +37,16 @@ class SupportService
     {
         $this->repository->delete($id);
     }
+
+    public function paginate(
+        int $page = 1,
+        int $totalPerPage = 15,
+        string $filter = null
+    )
+    {
+        $this->repository->paginate(
+                        page: $page, 
+                        totalPerPage: $totalPerPage, 
+                        filter: $filter);
+    }
 }
